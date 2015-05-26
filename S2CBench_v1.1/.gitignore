@@ -2,4 +2,6 @@
 */*output.txt
 */*out.bmp
 ann/ann_log.rpt
+interpolation/odata.txt
+interpolation/odata_enable.txt
 uart/receive.txt
