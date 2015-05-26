@@ -41,7 +41,7 @@ void test_adpcm::send(){
   while(true){
 
    
-    while(fscanf(in_file,"%f", &indata) != EOF){
+    while(fscanf(in_file,"%d", &indata) != EOF){
       idata.write(indata);
       wait();
     }
@@ -141,7 +141,7 @@ void test_adpcm::compare_results(){
 
       if(out_adpcm != out_golden ){
 	cout << "\nOutput missmatch [line:" << line << "] Golden:" << out_golden << " -- Output:" << out_adpcm;
-	fprintf(diff_file,"\nOutput missmatch[line:%d] Golden: %u -- Output: %d+i%d",line, out_golden, out_adpcm);   
+	fprintf(diff_file,"\nOutput missmatch[line:%d] Golden: %u -- Output: %d",line, out_golden, out_adpcm);
 	errors++;
       }
       

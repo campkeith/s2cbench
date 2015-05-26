@@ -144,7 +144,7 @@ void adpcm::run() {
 
 sc_uint<4> adpcm::get_index_delta( sc_uint<4> enc )
 {
-   if( enc>=0 && enc<=3 ) return 1;
+   if( enc<=3 ) return 1;
    else if( enc==4 ) return 2;
    else if( enc==5 ) return 4;
    else if( enc==6 ) return 6;
