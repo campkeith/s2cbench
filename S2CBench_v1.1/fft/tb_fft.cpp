@@ -169,7 +169,10 @@ void test_fft::compare_results(){
 
       cout << endl <<"Cycle["<< line << "]: " << out_golden_real << "+i" << out_golden_imag << " -- "<< outfft_real <<"+i" << outfft_imag;
 
-      if(outfft_real != out_golden_real || outfft_imag != out_golden_imag ){
+      const float error_tolerance = 1e-5;
+      float error_real = fabsf((outfft_real - out_golden_real) / out_golden_real);
+      float error_imag = fabsf((outfft_imag - out_golden_imag) / out_golden_imag);
+      if(error_real > error_tolerance || error_imag > error_tolerance){
 	cout << "\nOutput missmatch [line:" << line << "] Golden:" << out_golden_real << "+i" << out_golden_imag << " -- Output:" << outfft_real << "+i" << outfft_imag;
 
 	fprintf(diff_file,"\nOutput missmatch[line:%d] Golden: %0.16f+i%0.f -- Output: %0.16f+i%0.f",line, out_golden_real, out_golden_imag,  outfft_real, outfft_imag);
