@@ -165,7 +165,7 @@ void test_idct::compare_results(){
 
       if(out_idct != out_golden ){
 	cout << "\nOutput missmatch [line:" << line << "] Golden:" << out_golden << " -- Output:" << out_idct;
-	fprintf(diff_file,"\nOutput missmatch[line:%d] Golden: %u -- Output: %d+i%d",line, out_golden, out_idct);   
+	fprintf(diff_file,"\nOutput missmatch[line:%d] Golden: %u -- Output: %u",line, out_golden, out_idct);
 	errors++;
       }
       
