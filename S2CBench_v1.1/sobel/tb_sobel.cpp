@@ -238,8 +238,6 @@ void tb_sobel::compare_results(){
      for(i=0;i<ROWS;i++){
        for(j=1;j<COLS;j++){
 
-	 bitmapData[(i*ROWS)+j];
-	  
 #ifdef PRINTD 
 	   cout << endl <<"Cycle["<< line << "]: " <<  bitmapData[(i*ROWS)+j] << "-- "<<  bitmapFinalImage[(i*ROWS)+j];
 #endif
