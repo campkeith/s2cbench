@@ -12,8 +12,8 @@
 //16/07/13             1.0             Testbench send/receive and compare outputs
 //===========================================================================
 
-#define TEST_DISPARITY
 #ifndef TEST_DISPARITY
+#define TEST_DISPARITY
 
 #include "define.h"
 
@@ -94,4 +94,4 @@ SC_MODULE (test_disparity) {
 };
 
 
-#ifndef // TEST_DISPARITY
+#endif // TEST_DISPARITY
