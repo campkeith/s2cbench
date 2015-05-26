@@ -41,7 +41,7 @@ void tb_sobel::send(void){
 
     // Send Image data to sobel filter
      for(i=0;i<ROWS;i++){
-         for(j=1;j<COLS;j++){
+         for(j=1;j<COLS-1;j++){
 	   for(k=j-1;k<=j+1;k++){
 	
 	     // Send triplets at a time

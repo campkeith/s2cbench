@@ -30,7 +30,7 @@ void sobel::sobel_main(void)
 
       // Reading triplet data needed for filter
       for(x=0;x<ROWS; x++){
-	for(j=1;j<COLS;j++){
+	for(j=1;j<COLS-1;j++){
 	  for(i=j-1;i<= j+1;i++){
 
 	    if(i== j-1)
