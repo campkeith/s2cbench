@@ -22,7 +22,6 @@
 void test_adpcm::send(){
 
   // Variables declaration
-  int i=0;
   unsigned int  indata;
 
   //Reset routine
