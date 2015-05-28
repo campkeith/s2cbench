@@ -24,7 +24,7 @@ layer::layer() : initialized(false),
 DW(NULL), Wprev(NULL), Db(NULL), bprev(NULL), a(NULL), s(NULL)
 {}
 
-layer::layer(unsigned int n_in, unsigned int n_n) : NumIn(n_in), NumN(n_n), initialized(true)
+layer::layer(unsigned int n_in, unsigned int n_n) : initialized(true), NumIn(n_in), NumN(n_n)
 {
    /* Dynamic memory */
    b = new int[NumN];
@@ -35,7 +35,7 @@ layer::layer(unsigned int n_in, unsigned int n_n) : NumIn(n_in), NumN(n_n), init
    W = new int*[NumN];
    DW = new float*[NumN];
    Wprev = new int*[NumN];
-   for(int n=0; n<NumN; n++)
+   for(int unsigned n=0; n<NumN; n++)
    {
       W[n] = new int[NumIn];
       DW[n] = new float[NumIn];
@@ -51,7 +51,7 @@ layer::~layer()
    delete [] bprev;
    delete [] a;
    delete [] s;
-   for(int n=0; n<NumN; n++)
+   for(int unsigned n=0; n<NumN; n++)
    {
       delete [] W[n];
       delete [] DW[n];
@@ -79,7 +79,7 @@ int layer::initialize(unsigned int n_in, unsigned int n_n)
       W = new int*[NumN];
       DW = new float*[NumN];
       Wprev = new int*[NumN];
-      for(int n=0; n<NumN; n++)
+      for(int unsigned n=0; n<NumN; n++)
       {
          W[n] = new int[NumIn];
          DW[n] = new float[NumIn];

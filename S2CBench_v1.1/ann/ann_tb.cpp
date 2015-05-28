@@ -48,7 +48,7 @@ double  ann_tb::error_calculation(int *P, double *e)
 {
    double MSE = 0.0; // Mean Squared Error
    double aux;
-   int i,  Local_e;
+   unsigned int i,  Local_e;
 
    for(i = 0; i < nn[Nlayer-1].NumN; i++)
    {
@@ -118,9 +118,9 @@ void ann_tb::learning_cthread()
    for(int l=0; l<Nlayer; l++)
    {
       /* Generate RANDOM weights first */
-      for(int n=0; n<nn[l].NumN; n++)
+      for(int unsigned n=0; n<nn[l].NumN; n++)
       {
-         for(int i=0; i<nn[l].NumIn; i++)
+         for(int unsigned i=0; i<nn[l].NumIn; i++)
          {
             nn[l].W[n][i] = (rand()%RAND_RANGE) - RAND_RANGE/2;
             wdata->write(nn[l].W[n][i]);
@@ -128,7 +128,7 @@ void ann_tb::learning_cthread()
          }
       }
       /* Generate RANDOM biases second */
-      for(int n=0; n<nn[l].NumN; n++)
+      for(int unsigned n=0; n<nn[l].NumN; n++)
       {
          nn[l].b[n] = (rand()%RAND_RANGE) - RAND_RANGE/2;
          wdata->write(nn[l].b[n]);
@@ -173,12 +173,12 @@ void ann_tb::learning_cthread()
           */
          for(int l=0; l<(Nlayer-1); l++)
          {
-            for(int i=0; i<nn[l].NumN; i++)
+            for(int unsigned i=0; i<nn[l].NumN; i++)
             {
                nn[l].a[i] = a[l][i];
             }
          }
-         for(int i=0; i<nn[Nlayer-1].NumN; i++)
+         for(int unsigned i=0; i<nn[Nlayer-1].NumN; i++)
          {
             nn[Nlayer-1].a[i] = outputs[i]->read();
          }
@@ -194,7 +194,7 @@ void ann_tb::learning_cthread()
           **BACKPROPAGATION
           */
          // Calculation of DW and Db of the output layer
-         for(int i = 0; i < nn[Nlayer-1].NumN; i++)
+         for(int unsigned i = 0; i < nn[Nlayer-1].NumN; i++)
          {
             // Calculation of sensibility S of the output layer
             double Local_S2 = -2.0;
@@ -205,7 +205,7 @@ void ann_tb::learning_cthread()
             nn[Nlayer-1].Db[i] += Local_S2;
 
 
-            for(int j = 0; j < nn[Nlayer-1].NumIn; j++)
+            for(int unsigned j = 0; j < nn[Nlayer-1].NumIn; j++)
             {
                nn[Nlayer-1].DW[i][j] += Local_S2 * nn[Nlayer-1].a[j];
             };
@@ -214,12 +214,12 @@ void ann_tb::learning_cthread()
          // Calculation of DW and Db of the rest layers
          for(int l=(Nlayer-2); l>=0; l--)
          {
-            for(int i = 0; i < nn[l].NumN; i++)
+            for(int unsigned i = 0; i < nn[l].NumN; i++)
             {
                // Calculation of sensibility S
                double Local_S1 = 0.0;
                // S1 = F1*W2'*S2;
-               for (int j = 0; j < nn[l+1].NumN; j++)
+               for (int unsigned j = 0; j < nn[l+1].NumN; j++)
                {
                   Local_S1 += nn[l+1].W[j][i]*nn[l+1].s[j]*0.000244140625; //*1/(2^12)
                };
@@ -232,7 +232,7 @@ void ann_tb::learning_cthread()
 
                // DW1 = Lr*S1*P';
                // As S2 = S2*Lr => DW1 = S1*P
-               for(int j = 0; j < nn[l].NumIn; j++)
+               for(int unsigned j = 0; j < nn[l].NumIn; j++)
                {
                   if(l==0)
                      nn[l].DW[i][j] += Local_S1*((double)P[j]);
@@ -273,7 +273,7 @@ void ann_tb::learning_cthread()
          int clipp;
          for(int l=0; l<Nlayer; l++)
          {
-            for(int i=0; i<nn[l].NumN; i++)
+            for(int unsigned i=0; i<nn[l].NumN; i++)
             {
                nn[l].bprev[i] = nn[l].b[i];
                clipp = nn[l].b[i] - ((int)(nn[l].Db[i]*4.0));
@@ -283,7 +283,7 @@ void ann_tb::learning_cthread()
                   nn[l].b[i] = -1<<(NbitW-1); //0xFFFF8000 for 16 bits;
                else
                   nn[l].b[i] = clipp;
-               for(int j=0; j<nn[l].NumIn; j++)
+               for(int unsigned j=0; j<nn[l].NumIn; j++)
                {
                   nn[l].Wprev[i][j] = nn[l].W[i][j];
                   clipp = nn[l].W[i][j] - ((int)(nn[l].DW[i][j]*4.0));
@@ -307,10 +307,10 @@ void ann_tb::learning_cthread()
       {
          for(int l=0; l<Nlayer; l++)
          {
-            for(int i=0; i<nn[l].NumN; i++)
+            for(int unsigned i=0; i<nn[l].NumN; i++)
             {
                nn[l].b[i] = nn[l].bprev[i];
-               for(int j=0; j<nn[l].NumIn; j++)
+               for(int unsigned j=0; j<nn[l].NumIn; j++)
                {
                   nn[l].W[i][j] = nn[l].Wprev[i][j];
                   nn[l].DW[i][j] = 0.0;
@@ -326,16 +326,16 @@ void ann_tb::learning_cthread()
       for(int l=0; l<Nlayer; l++)
       {
          /* Write weights first */
-         for(int n=0; n<nn[l].NumN; n++)
+         for(int unsigned n=0; n<nn[l].NumN; n++)
          {
-            for(int i=0; i<nn[l].NumIn; i++)
+            for(int unsigned i=0; i<nn[l].NumIn; i++)
             {
                wdata->write(nn[l].W[n][i]);
                wait();
             }
          }
          /* Write biases second */
-         for(int n=0; n<nn[l].NumN; n++)
+         for(int unsigned n=0; n<nn[l].NumN; n++)
          {
             wdata->write(nn[l].b[n]);
             wait();
@@ -472,17 +472,17 @@ void ann_tb::learning_cthread()
        fprintf(ptr_file_results,"\nWeights:");
 
        /* Write weights first */
-       for(int n=0; n<nn[l].NumN; n++)
+       for(int unsigned n=0; n<nn[l].NumN; n++)
        {
           fprintf(ptr_file_results,"\n");
-          for(int i=0; i<nn[l].NumIn; i++)
+          for(int unsigned i=0; i<nn[l].NumIn; i++)
           {
              fprintf(ptr_file_results,"%d ",nn[l].W[n][i]);
           }
        }
        /* Write biases second */
        fprintf(ptr_file_results,"\nBias:\n");
-       for(int n=0; n<nn[l].NumN; n++)
+       for(int unsigned n=0; n<nn[l].NumN; n++)
        {
 	       fprintf(ptr_file_results,"%d ",nn[l].b[n]);
        }
@@ -536,7 +536,6 @@ double ann_tb::derived_saturated(int x)
 unsigned char  *ann_tb::load_bitmapfile(const char *im_path)
 {
    unsigned char *bitmapImage;
-   int l;
 
    // Open bmp file to be filtered
    image_in = fopen(im_path,"rb");
@@ -617,7 +616,7 @@ void ann_tb::image_write(char *image_out_name)
 {
    // Variables declaration
    int i,j,bytesperline,n;
-   int l,k,len,m,x;
+   int l,k;
    unsigned char *tk;
 
 #ifdef PRINTD

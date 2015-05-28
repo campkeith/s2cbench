@@ -34,9 +34,9 @@ int *a[Nlayer-1]; //outputs of the hidden layers for backpropagation. global var
 
 int sc_main(int argc, char** argv)
 {
-
+#ifdef WAVE_DUMP
    char name[10];
-
+#endif
 
    cout << "Starting ANN" << endl;
 
