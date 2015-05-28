@@ -24,7 +24,7 @@
 void test_aes::send(){
 
   // Variables declaration
-  int i=0, ret=0;
+  int i=0;
   unsigned int  in_read, in_read_key;
 
   //Reset routine

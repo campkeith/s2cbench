@@ -32,7 +32,9 @@ int sc_main(int argc, char** argv)
 
 
   int x;
+#ifdef WAVE_DUMP
   char name[10];
+#endif
 
 
   aes 	 u_AES("AES");
