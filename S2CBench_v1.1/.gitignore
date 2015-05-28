@@ -1,3 +1,6 @@
+*.log
+*/lcov/
+*/sim/
 */*diff*.txt
 */*output.txt
 */*out.bmp
