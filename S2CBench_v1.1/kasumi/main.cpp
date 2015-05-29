@@ -28,8 +28,9 @@ int sc_main(int argc, char** argv)
   sc_signal<sc_uint<8> >  k[8][2];
 
   int x, y;
+#ifdef WAVE_DUMP
   char name[15];
-
+#endif
 
   kasumi u_KASUMI("KASUMI");
   test_kasumi u_TEST("test_KASUMI");
