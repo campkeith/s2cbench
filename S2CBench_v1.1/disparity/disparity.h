@@ -55,15 +55,15 @@ SC_MODULE (disparity) {
    sc_int<20> pixel_LR_diff_adj;
 
    // counters declarations -Declared as integers. HLS tool should optimize their bw
-  int count_skip_line;
-  int count_skip_pixel ;
-  int count_hd;
-  int count_wd;
-  int count_delay;
-  int count_hsize;
-  int count_wsize;
-  int count_pixel;
-  int count_line;
+  int unsigned count_skip_line;
+  int unsigned count_skip_pixel ;
+  int unsigned count_hd;
+  int unsigned count_wd;
+  int unsigned count_delay;
+  int unsigned count_hsize;
+  int unsigned count_wsize;
+  int unsigned count_pixel;
+  int unsigned count_line;
 
   sc_signal<sc_uint<1> > HSynch_pulse;
   sc_signal<sc_uint<1> > HSynch_d1;

@@ -47,7 +47,7 @@ SC_MODULE (test_disparity) {
   char BmpHeader2[28];
 
   int frame, x, y;
-  unsigned int height, width, plusbytes;
+  int height, width, plusbytes;
 
   // Pointers to bmp images loaded/generated
   unsigned char **inbmp;

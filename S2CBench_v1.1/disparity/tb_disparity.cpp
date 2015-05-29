@@ -101,7 +101,6 @@ void test_disparity::send(){
   Height.write(0);
   Width.write(0);
 
-  int finish_read = 0;
   valid_in.write(false);
 
 
