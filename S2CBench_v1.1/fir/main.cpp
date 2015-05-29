@@ -28,8 +28,9 @@ int sc_main(int argc, char** argv)
  
   sc_signal<sc_uint<8> > filter_output; 
   int x;
+#ifdef WAVE_DUMP
   char name[10];
-
+#endif
 
   fir u_FIR("FIR");
   test_FIR test("test_FIR");
