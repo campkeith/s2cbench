@@ -23,7 +23,6 @@ void tb_interp::send(void){
   // Variables declarations
   float indata_var;
   float  infactor_var;
-  int k;
 
 
    //Reset initialization
