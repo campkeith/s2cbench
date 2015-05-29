@@ -292,6 +292,8 @@ void test_disparity::compare_results(){
     
   // Variables
   int errors=0;
+  char zero[plusbytes];
+  bzero(zero, sizeof(zero));
 
   // Create bmp file with results
   out_file     = fopen(OUTFILENAME,"wb");
@@ -315,7 +317,7 @@ void test_disparity::compare_results(){
       fwrite(&outbmp[y][x], 1, 1, out_file);
       fwrite(&outbmp[y][x], 1, 1, out_file);
       if(x==(WIDTH-1)&&(plusbytes!=0))
-	fwrite(0, 1, plusbytes, out_file);
+	fwrite(zero, 1, plusbytes, out_file);
     }
   }
 
