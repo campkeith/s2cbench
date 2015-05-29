@@ -1,6 +1,6 @@
 //========================================================================================
 // 
-// File Name    : ann_tb.cpp
+// File Name    : tb_ann.cpp
 // Description  : ANN Test bench
 // Release Date : 22/10/2014
 // 
@@ -12,13 +12,13 @@
 // 2014          1.0            David Aledo     top module (TB and ANN)
 // 2014          1.1            B Carrion Schafer  added 2 and 4 layer configuration
 //=======================================================================================
-#include "ann_tb.h"
+#include "tb_ann.h"
 
 
 /*
  ** Constructor
  */
-ann_tb::ann_tb(sc_module_name nm) : sc_module(nm)
+tb_ann::tb_ann(sc_module_name nm) : sc_module(nm)
 {
    bmp_file_in = 0;
    bmp_file_out= 0;
@@ -36,7 +36,7 @@ ann_tb::ann_tb(sc_module_name nm) : sc_module(nm)
 /*
  ** Destructor
  */
-ann_tb::~ann_tb()
+tb_ann::~tb_ann()
 {
    delete [] nn;
 }
@@ -44,7 +44,7 @@ ann_tb::~ann_tb()
 /*
  ** ERROR calculation
  */
-double  ann_tb::error_calculation(int *P, double *e)
+double  tb_ann::error_calculation(int *P, double *e)
 {
    double MSE = 0.0; // Mean Squared Error
    double aux;
@@ -64,7 +64,7 @@ double  ann_tb::error_calculation(int *P, double *e)
 /*
  ** ANN learner main function
  */
-void ann_tb::learning_cthread()
+void tb_ann::learning_cthread()
 {
    /* Variables */
    int *P = new int[nn[0].NumIn];  // Input patch. It is also equal to the desired output patch
@@ -508,7 +508,7 @@ void ann_tb::learning_cthread()
  **  Saturate max values given by NbitOut
  **
  *******************************/
-double ann_tb::derived_saturated(int x)
+double tb_ann::derived_saturated(int x)
 {
 
   int max= pow(2,NbitOut-1);
@@ -533,7 +533,7 @@ double ann_tb::derived_saturated(int x)
  **  Bitmap loading function
  **
  *******************************/
-unsigned char  *ann_tb::load_bitmapfile(const char *im_path)
+unsigned char  *tb_ann::load_bitmapfile(const char *im_path)
 {
    unsigned char *bitmapImage;
 
@@ -612,7 +612,7 @@ unsigned char  *ann_tb::load_bitmapfile(const char *im_path)
  ** Create new BMP file for filter results 
  **
  *********************************************/
-void ann_tb::image_write(char *image_out_name)
+void tb_ann::image_write(char *image_out_name)
 {
    // Variables declaration
    int i,j,bytesperline,n;

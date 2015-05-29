@@ -1,6 +1,6 @@
 //========================================================================================
 // 
-// File Name    : ann_tb.h
+// File Name    : tb_ann.h
 // Description  : 
 // Release Date : 22/10/2014
 // 
@@ -14,8 +14,8 @@
 //=====================================================================================
 
 
-#ifndef ANN_TB_H
-#define ANN_TB_H
+#ifndef TB_ANN_H
+#define TB_ANN_H
 
 #include <stdio.h>
 #include <iostream>
@@ -35,7 +35,7 @@
 
 extern int *a[Nlayer-1]; //global variable for training
 
-SC_MODULE(ann_tb)
+SC_MODULE(tb_ann)
 {
 
   //Inputs
@@ -83,11 +83,11 @@ SC_MODULE(ann_tb)
 
 
    /* Constructors */
-   SC_HAS_PROCESS(ann_tb);
-   ann_tb(sc_module_name nm);
+   SC_HAS_PROCESS(tb_ann);
+   tb_ann(sc_module_name nm);
 
    /* Destructor */
-   ~ann_tb();
+   ~tb_ann();
 };
 
 #endif

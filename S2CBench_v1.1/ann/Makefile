@@ -17,12 +17,12 @@ TARGET	= ann.exe
 
 SRCS	=  \
 	main.cpp \
-	ann_tb.cpp \
+	tb_ann.cpp \
 	layer.cpp \
 	ann.cpp
 
 HDRS	=  \
-	ann_tb.h \
+	tb_ann.h \
 	layer.h \
 	image_parameters.h \
 	config.h \
@@ -102,7 +102,7 @@ main.o: main.cpp
 	$(CC) $(CFLAGS) $(CWB_SC_INCL) $(INCL)  -c $< -o $@
 
 
-ann_tb.o: ann_tb.cpp
+tb_ann.o: tb_ann.cpp
 	$(CC) $(CFLAGS) $(CWB_SC_INCL) $(INCL) -c $< -o $@
 
 layer.o: layer.cpp

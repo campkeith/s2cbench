@@ -2,7 +2,7 @@
 // 
 // File Name    : main.cpp
 // Description  : Main function for the simulation and training of the Artificial Neural Network (ANN)
-//                The traing is peformed at the testbench ann_tb.cpp), while the ANN is 
+//                The traing is peformed at the testbench tb_ann.cpp), while the ANN is 
 //                described in ann.cpp (this is also the synthesizable part)
 // Release Date : 22/10/2014
 // 
@@ -24,7 +24,7 @@
 #include <string.h>
 
 /* Include modules */
-#include "ann_tb.h"
+#include "tb_ann.h"
 #include "ann.h"
 
 /* Parameters */
@@ -47,7 +47,7 @@ int sc_main(int argc, char** argv)
 
    /* Modules */
    ann u_ann("ann");
-   ann_tb train_tb("train_tb");
+   tb_ann train_tb("train_tb");
 
    /* Signals */
    sc_clock clk("clk", 10, SC_NS, 0.5, 5, SC_NS, true);
