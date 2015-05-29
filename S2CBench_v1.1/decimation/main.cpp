@@ -37,8 +37,10 @@ int sc_main(int argc, char** argv)
    sc_signal < sc_fixed<19, 2, SC_RND, SC_SAT> > odata;
 
   int x;
-  char name[10];
 
+#ifdef WAVE_DUMP
+  char name[10];
+#endif
 
   decfilt u_DECIM("DECIMATION");
   test_decim u_test("test_DECIMATION");

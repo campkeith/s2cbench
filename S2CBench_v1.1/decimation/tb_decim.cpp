@@ -24,7 +24,7 @@ void test_decim::send(){
 
   // Variables declaration
   int i=0;
-  float coeff_read, in_filter_read;
+  float in_filter_read;
 
   float incoef1_read[TAPS_STAGE1] ;
   float incoef2_read[TAPS_STAGE2] ;
