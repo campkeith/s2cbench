@@ -6,42 +6,40 @@
 //-------------------------
 void test_net_sort::send(){
 
-  // Variables declaration
-  unsigned  in_read;
-
-  //Reset routine
-  in_file = fopen(INFILENAME, "rt");
-
-
-  if(!in_file){
-    cout << "Could not open " << INFILENAME << "\n";
-    sc_stop();
-    exit(EXIT_FAILURE);
-  }
-
-
-  indata.write(0);
-
-  
-  wait();
-
-  while(true){
-
-    while(fscanf(in_file,"%d", &in_read) != EOF){
-	indata.write(in_read);
-	wait();
+    in_file = fopen(INFILENAME, "rt");
+    if (!in_file)
+    {
+        perror(INFILENAME);
+        sc_stop();
     }
-  
-   
-    fclose(in_file);
-    cout << endl << "Starting comparing results " << endl;
- 
-    compare_results();
-    sc_stop();
 
+    for (size_t index = 0; index < SIZE; index++)
+    {
+        indata[index].write(0);
+    }
     wait();
 
-  }//while_loop
+    while (true)
+    {
+        for (size_t index = 0; index < SIZE; index++)
+        {
+            int element;
+            int result = fscanf(in_file, "%d", &element);
+            if (result == EOF)
+            {
+                assert(index == 0);
+                goto exit_loop;
+            }
+            indata[index].write(element);
+        }
+        wait();
+    }
+exit_loop:
+
+    fclose(in_file);
+    cout << endl << "Starting comparing results " << endl;
+    compare_results();
+    sc_stop();
 }
 
 
@@ -51,28 +49,22 @@ void test_net_sort::send(){
 //--------------------------
 void test_net_sort::recv(){
 
-  // Variables declaration
-  unsigned int out_write=0;
-
-  out_file = fopen (OUTFILENAME, "wt");
-
-  if(!out_file){
-    cout << "Could not open " << OUTFILENAME << "\n";
-    sc_stop();
-  }
-
-
-  wait();
-
-  while(true){
-
-    out_write = odata.read();
-    fprintf(out_file,"%d\n",out_write);
-
-    //	cout << "\nReading "  << out_write;
-
+    out_file = fopen (OUTFILENAME, "wt");
+    if (!out_file) {
+        perror(OUTFILENAME);
+        sc_stop();
+    }
     wait();
-  }
+
+    while (true)
+    {
+        for (size_t index = 0; index < SIZE; index++) {
+            int element = odata[index].read();
+            fprintf(out_file, "%3d ", element);
+        }
+        fprintf(out_file, "\n");
+        wait();
+    }
 }
 
 

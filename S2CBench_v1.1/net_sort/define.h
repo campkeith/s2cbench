@@ -16,4 +16,7 @@
 #define OUTFILENAME              "net_sort_output.txt"
 #define DIFFFILENAME             "net_sort_diff.txt"
 
+typedef sc_uint<8> Element;
+typedef Element Array[SIZE];
+
 #endif

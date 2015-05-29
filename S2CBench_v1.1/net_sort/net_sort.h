@@ -3,16 +3,13 @@
 
 #include "define.h"
 
-typedef sc_uint<8> Element;
-typedef Element Array[SIZE];
-
 SC_MODULE(net_sort)
 {
     sc_in<bool> clk;
     sc_in<bool> rst;
 
-    sc_in<Element> indata;
-    sc_out<Element> odata;
+    sc_in<Element> indata[SIZE];
+    sc_out<Element> odata[SIZE];
 
     void run();
     void sort(Array &);

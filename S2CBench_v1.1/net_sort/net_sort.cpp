@@ -1,15 +1,17 @@
 #include "net_sort.h"
 
 void net_sort::run() {
-    Array data;
     wait();
-    while(1) {
-        for(size_t index = 0; index < SIZE; index++) {
-            odata.write(data[index]);
-            data[index] = indata.read();
-            wait();
+    while(true) {
+        Array array;
+        for (size_t index = 0; index < SIZE; index++) {
+            array[index] = indata[index].read();
         }
-        sort(data);
+        sort(array);
+        for (size_t index = 0; index < SIZE; index++) {
+            odata[index].write(array[index]);
+        }
+        wait();
     }
 }
 
