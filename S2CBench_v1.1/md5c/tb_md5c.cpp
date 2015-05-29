@@ -22,7 +22,6 @@
 void test_md5c::send(){
 
   // Variables declaration
-  int i=0;
   unsigned int inputlen;
 
   //Reset routine
