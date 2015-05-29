@@ -9,10 +9,12 @@ SC_MODULE (test_net_sort){
   sc_in<bool>          clk;
   sc_in<bool>          rst;
 
+  sc_in<Size> osize;
   sc_in<Element> odata[SIZE]; 
 
 
   //  Outputs
+  sc_out<Size> insize;
   sc_out<Element>  indata[SIZE];
 
 

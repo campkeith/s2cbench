@@ -13,28 +13,27 @@ void test_net_sort::send(){
         sc_stop();
     }
 
-    for (size_t index = 0; index < SIZE; index++)
-    {
-        indata[index].write(0);
-    }
+    insize.write(0);
     wait();
 
     while (true)
     {
-        for (size_t index = 0; index < SIZE; index++)
+        size_t size;
+        int result = fscanf(in_file, "%zu", &size);
+        if (result == EOF)
+        {
+            break;
+        }
+        insize.write(size);
+        for (size_t index = 0; index < size; index++)
         {
             int element;
             int result = fscanf(in_file, "%d", &element);
-            if (result == EOF)
-            {
-                assert(index == 0);
-                goto exit_loop;
-            }
+            assert(result != EOF);
             indata[index].write(element);
         }
         wait();
     }
-exit_loop:
 
     fclose(in_file);
     cout << endl << "Starting comparing results " << endl;
@@ -58,9 +57,10 @@ void test_net_sort::recv(){
 
     while (true)
     {
-        for (size_t index = 0; index < SIZE; index++) {
+        Size size = osize.read();
+        for (size_t index = 0; index < size; index++) {
             int element = odata[index].read();
-            fprintf(out_file, "%3d ", element);
+            fprintf(out_file, " %3d", element);
         }
         fprintf(out_file, "\n");
         wait();

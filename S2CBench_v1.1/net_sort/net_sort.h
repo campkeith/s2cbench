@@ -8,7 +8,9 @@ SC_MODULE(net_sort)
     sc_in<bool> clk;
     sc_in<bool> rst;
 
+    sc_in<Size> insize;
     sc_in<Element> indata[SIZE];
+    sc_out<Size> osize;
     sc_out<Element> odata[SIZE];
 
     void run();

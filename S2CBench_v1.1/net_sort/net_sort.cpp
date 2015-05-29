@@ -3,12 +3,19 @@
 void net_sort::run() {
     wait();
     while(true) {
+        Size size = insize.read();
         Array array;
         for (size_t index = 0; index < SIZE; index++) {
+            array[index] = -1;
+        }
+        for (size_t index = 0; index < size; index++) {
             array[index] = indata[index].read();
         }
+
         sort(array);
-        for (size_t index = 0; index < SIZE; index++) {
+
+        osize.write(size);
+        for (size_t index = 0; index < size; index++) {
             odata[index].write(array[index]);
         }
         wait();
