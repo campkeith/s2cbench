@@ -8,8 +8,10 @@ SC_MODULE(net_sort)
     sc_in<bool> clk;
     sc_in<bool> rst;
 
+    sc_in<bool> din_vld;
     sc_in<Size> insize;
     sc_in<Element> indata[SIZE];
+    sc_out<bool> dout_vld;
     sc_out<Size> osize;
     sc_out<Element> odata[SIZE];
 

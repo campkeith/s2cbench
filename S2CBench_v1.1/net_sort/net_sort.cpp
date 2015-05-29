@@ -1,23 +1,29 @@
 #include "net_sort.h"
 
 void net_sort::run() {
+    dout_vld.write(0);
     wait();
     while(true) {
-        Size size = insize.read();
-        Array array;
-        for (size_t index = 0; index < SIZE; index++) {
-            array[index] = -1;
-        }
-        for (size_t index = 0; index < size; index++) {
-            array[index] = indata[index].read();
-        }
+        bool data_valid = din_vld.read();
+        if (data_valid)
+        {
+            Size size = insize.read();
+            Array array;
+            for (size_t index = 0; index < SIZE; index++) {
+                array[index] = -1;
+            }
+            for (size_t index = 0; index < size; index++) {
+                array[index] = indata[index].read();
+            }
 
-        sort(array);
+            sort(array);
 
-        osize.write(size);
-        for (size_t index = 0; index < size; index++) {
-            odata[index].write(array[index]);
+            osize.write(size);
+            for (size_t index = 0; index < size; index++) {
+                odata[index].write(array[index]);
+            }
         }
+        dout_vld.write(data_valid);
         wait();
     }
 }

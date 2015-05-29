@@ -13,7 +13,7 @@ void test_net_sort::send(){
         sc_stop();
     }
 
-    insize.write(0);
+    din_vld.write(0);
     wait();
 
     while (true)
@@ -32,6 +32,7 @@ void test_net_sort::send(){
             assert(result != EOF);
             indata[index].write(element);
         }
+        din_vld.write(1);
         wait();
     }
 
@@ -57,12 +58,15 @@ void test_net_sort::recv(){
 
     while (true)
     {
-        Size size = osize.read();
-        for (size_t index = 0; index < size; index++) {
-            int element = odata[index].read();
-            fprintf(out_file, " %3d", element);
+        if (dout_vld.read())
+        {
+            Size size = osize.read();
+            for (size_t index = 0; index < size; index++) {
+                int element = odata[index].read();
+                fprintf(out_file, " %3d", element);
+            }
+            fprintf(out_file, "\n");
         }
-        fprintf(out_file, "\n");
         wait();
     }
 }

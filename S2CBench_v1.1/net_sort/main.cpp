@@ -6,6 +6,8 @@ int sc_main(int argc, char * argv[])
     sc_clock                clk("clk", 25, SC_NS, 0.5, 12.5, SC_NS, true);
     sc_signal<bool>         rst;
 
+    sc_signal<bool> din_vld;
+    sc_signal<bool> dout_vld;
     sc_signal<Size> insize;
     sc_signal<Size> osize;
     sc_signal<Element> indata[SIZE];
@@ -16,7 +18,9 @@ int sc_main(int argc, char * argv[])
 
     u_net_sort.clk( clk );
     u_net_sort.rst( rst );
+    u_net_sort.din_vld( din_vld );
     u_net_sort.insize( insize );
+    u_net_sort.dout_vld( dout_vld );
     u_net_sort.osize( osize );
     for (size_t index = 0; index < SIZE; index++) {
         u_net_sort.indata[index]( indata[index]);
@@ -25,7 +29,9 @@ int sc_main(int argc, char * argv[])
  
     u_test.clk( clk );
     u_test.rst( rst );
+    u_test.din_vld( din_vld );
     u_test.insize( insize );
+    u_test.dout_vld( dout_vld );
     u_test.osize( osize );
     for (size_t index = 0; index < SIZE; index++) {  
         u_test.indata[index]( indata[index] );
