@@ -26,8 +26,9 @@ int sc_main(int argc, char** argv)
   sc_signal<sc_uint<32> >  out_data[SIZE];
 
   int x;
+#ifdef WAVE_DUMP
   char name[10];
-
+#endif
 
   snow_3G u_SNOW("SNOW");
   test_snow_3G test("test_SNOW");
