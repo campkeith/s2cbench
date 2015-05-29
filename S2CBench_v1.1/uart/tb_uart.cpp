@@ -28,13 +28,10 @@
 
 void tb_uart::uart_transmit()
 {
-    int i = 0;
-    int k =0;
     int l =0;
     sc_uint<1> data;
     sc_uint<8> out_data_read;
     unsigned int in_data_read;
-    unsigned int receive_data;
 
     transmit_file = fopen(TRANSMITFILENAME,"rt");
 
