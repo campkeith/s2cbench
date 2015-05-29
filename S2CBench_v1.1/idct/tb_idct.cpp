@@ -23,7 +23,6 @@
 void test_idct::send(){
 
   // Variables declaration
-  int i=0;
   unsigned int  indata, incoef;
 
   // open input data files
