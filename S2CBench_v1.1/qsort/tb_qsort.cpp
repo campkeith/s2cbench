@@ -24,7 +24,6 @@
 void test_qsort::send(){
 
   // Variables declaration
-  int i=0;
   unsigned  in_read;
 
   //Reset routine

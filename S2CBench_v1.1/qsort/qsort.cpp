@@ -54,7 +54,8 @@ void quicksort::sort(sc_uint<8> *arr){
 
 
   // Variables declaration
-  int  piv, beg[SIZE], end[SIZE], i=0, L, R;
+  sc_uint<8> piv;
+  int beg[SIZE], end[SIZE], i=0, L, R;
 
   beg[0]=0;
   end[0]=SIZE;
