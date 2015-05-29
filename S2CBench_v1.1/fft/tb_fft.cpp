@@ -22,7 +22,6 @@
 void test_fft::send(){
 
   // Variables declaration
-  int i=0;
   float  in_read_real, in_read_imag;
 
   //Reset routine
