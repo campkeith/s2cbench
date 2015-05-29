@@ -84,7 +84,6 @@ void tb_sobel::send(void){
 {
  
   unsigned char *bitmapImage;
-  int l;
 
  // Open bmp file to be filtered
   ifptr = fopen(image,"rb");
@@ -173,7 +172,7 @@ void tb_sobel::recv(void){
 
   // variablesd declaration
   sc_uint<8> output_row_read;
-  int f=0,k,m;
+  int k,m;
 
 
   //open file for writing
@@ -273,7 +272,7 @@ void tb_sobel::image_write(void){
 
   // Variables declaration
   int i,j,bytesperline,n;
-  int l,k,len,m,x;
+  int l,k;
   unsigned char  *tk;
 
 

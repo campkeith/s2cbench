@@ -27,8 +27,9 @@ int sc_main(int argc, char* argv[]){
   sc_signal<sc_uint<8> > input_row[3];
   sc_signal<sc_uint<8> > output_row;
   int i;
+#ifdef WAVE_DUMP
   char name[15];
-  
+#endif
 
   sobel s_obj("sobel");
   tb_sobel tb_obj("tb_sobel");
