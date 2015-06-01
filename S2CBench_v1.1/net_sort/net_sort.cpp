@@ -8,18 +8,17 @@ void net_sort::run() {
         if (data_valid)
         {
             Size size = insize.read();
+            typedef sc_bv<SIZE> Mask;
+            Mask mask = Mask(-1) << size;
             Array array;
             for (size_t index = 0; index < SIZE; index++) {
-                array[index] = -1;
-            }
-            for (size_t index = 0; index < size; index++) {
-                array[index] = indata[index].read();
+                array[index] = mask[index] ? Element(-1) : indata[index].read();
             }
 
             sort(array);
 
             osize.write(size);
-            for (size_t index = 0; index < size; index++) {
+            for (size_t index = 0; index < SIZE; index++) {
                 odata[index].write(array[index]);
             }
         }
