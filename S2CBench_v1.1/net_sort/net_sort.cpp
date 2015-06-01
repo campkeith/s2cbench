@@ -6,14 +6,12 @@ void net_sort::run() {
 PROCESS_LOOP:
     while(true) {
         bool data_valid = din_vld.read();
-        Size size;
+        Size size = insize.read();
         Array array;
         if (data_valid)
         {
-            Size size = insize.read();
             typedef sc_bv<SIZE> Mask;
             Mask mask = Mask(-1) << size;
-            Array array;
 RCV_INPUTS:
             for (size_t index = 0; index < SIZE; index++) {
                 array[index] = mask[index] ? Element(-1) : indata[index].read();
