@@ -1,4 +1,11 @@
+
 #include "net_sort.h"
+
+#ifdef CTOS_MODEL
+#include "net_sort_ctos_wrapper.h"
+#else
+#endif
+
 #include "tb_net_sort.h"
 
 int sc_main(int argc, char * argv[])
@@ -13,8 +20,13 @@ int sc_main(int argc, char * argv[])
     sc_signal<Element> indata[SIZE];
     sc_signal<Element> odata[SIZE];
 
-    net_sort u_net_sort("net_sort");
-    test_net_sort u_test("test_net_sort");
+#ifdef CTOS_MODEL
+    net_sort_ctos_wrapper u_net_sort("u_net_sort", CTOS_TARGET_SUFFIX(CTOS_MODEL));
+#else
+    net_sort u_net_sort("u_net_sort");
+#endif
+
+    test_net_sort u_test("u_test");
 
     u_net_sort.clk( clk );
     u_net_sort.rst( rst );

@@ -3,6 +3,13 @@
 
 #include "define.h"
 
+#define INFILENAME               "net_sort_in_data.txt"
+
+#define OUTFILENAME_GOLDEN       "net_sort_output_golden.txt"
+#define OUTFILENAME              "net_sort_output.txt"
+#define DIFFFILENAME             "net_sort_diff.txt"
+
+
 SC_MODULE (test_net_sort){
 
   // Inputs

@@ -3,21 +3,28 @@
 void net_sort::run() {
     dout_vld.write(0);
     wait();
+PROCESS_LOOP:
     while(true) {
         bool data_valid = din_vld.read();
+        Size size;
+        Array array;
         if (data_valid)
         {
             Size size = insize.read();
             typedef sc_bv<SIZE> Mask;
             Mask mask = Mask(-1) << size;
             Array array;
+RCV_INPUTS:
             for (size_t index = 0; index < SIZE; index++) {
                 array[index] = mask[index] ? Element(-1) : indata[index].read();
             }
 
             sort(array);
-
+        }
+PIPE_STAGES:;
+	if (data_valid)  {
             osize.write(size);
+SEND_OUTPUTS:
             for (size_t index = 0; index < SIZE; index++) {
                 odata[index].write(array[index]);
             }
@@ -36,7 +43,7 @@ inline void sort2(Element & a, Element & b)
     b = new_b;
 }
 
-void net_sort::sort(Array & array) {
+void net_sort::sort(Array array) {
     /* Each sort net line contains operations that can run in parallel */
     const size_t sort_net[][2] = {
         {4,9},{3,8},{2,7},{1,6},{0,5},
@@ -50,8 +57,13 @@ void net_sort::sort(Array & array) {
         {4,5},
     };
     const size_t sort_net_size = sizeof(sort_net) / sizeof(sort_net[0]);
+COMPARE:
     for (size_t index = 0; index < sort_net_size; index++)
     {
         sort2(array[sort_net[index][0]], array[sort_net[index][1]]);
     }
 }
+
+#if defined(__CTOS__) 
+SC_MODULE_EXPORT(net_sort)
+#endif
