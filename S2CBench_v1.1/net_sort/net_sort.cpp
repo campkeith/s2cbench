@@ -14,7 +14,7 @@ PROCESS_LOOP:
             Mask mask = Mask(-1) << size;
 RCV_INPUTS:
             for (size_t index = 0; index < SIZE; index++) {
-                array[index] = mask[index] ? Element(-1) : indata[index].read();
+                array[index] = mask.get_bit(index) ? Element(-1) : indata[index].read();
             }
 
             sort(array);
